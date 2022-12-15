@@ -41,7 +41,6 @@ function addSelectedItemToCart() {
   // DONE: suss out the item picked from the select list
   let item = document.getElementById("items").value;
   let quantity = parseInt(document.getElementById("quantity").value);
-  console.log(item,quantity);
   
   // DONE: get the quantity
 
@@ -49,18 +48,35 @@ function addSelectedItemToCart() {
   let selectedItem = new CartItem(item,quantity);
 
   // state.cart.push(selectedItem);
-  console.log(state.cart);
+
   state.cart.items.push(selectedItem)
-  console.log(state.cart);
+
 }
 
-// TODO: Update the cart count in the header nav with the number of items in the Cart
-function updateCounter() { }
-
+// DONE: Update the cart count in the header nav with the number of items in the Cart
+function updateCounter() { 
+  let itemCount = document.getElementById('itemCount');
+  let sum = 0;
+  for (let i in state.cart.items){
+    sum += state.cart.items[i].quantity;
+  }
+  itemCount.innerText = `${sum}`
+}
 // TODO: As you add items into the cart, show them (item & quantity) in the cart preview div
+let cartContents = document.getElementById('cartContents');
+
 function updateCartPreview() {
   // TODO: Get the item and quantity from the form
+  while (cartContents.firstChild) {
+    cartContents.removeChild(cartContents.firstChild);
+  }
+  //for loops 
+  let item = state.cart.items.at(-1).product;
+  let quantity = state.cart.items.at(-1).quantity;
   // TODO: Add a new element to the cartContents div with that information
+  let previewDiv = document.createElement('div');
+  previewDiv.innerText = `You have ${quantity}, ${item} in your cart.`;
+  cartContents.appendChild(previewDiv);
 }
 
 // Set up the "submit" event listener on the form.
