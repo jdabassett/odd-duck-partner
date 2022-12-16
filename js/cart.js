@@ -18,7 +18,25 @@ function renderCart() {
 }
 
 // TODO: Remove all of the rows (tr) in the cart table (tbody)
-function clearCart() {}
+function clearCart() {
+  let array = Array.from(table.children);
+  console.log(array);
+  let tbody = array[1];
+  console.log(tbody.children);
+
+  while (tbody.firstChild){
+    tbody.removeChild(tbody.firstChild);
+   
+
+  }
+
+
+
+
+}
+
+
+
 
 // TODO: Fill in the <tr>'s under the <tbody> for each item in the cart
 function showCart() {
