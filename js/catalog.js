@@ -36,7 +36,7 @@ function handleSubmit(event) {
 
 }
 
-// TODO: Add the selected item and quantity to the cart
+// DONE: Add the selected item and quantity to the cart
 function addSelectedItemToCart() {
   // DONE: suss out the item picked from the select list
   let item = document.getElementById("items").value;
@@ -45,11 +45,12 @@ function addSelectedItemToCart() {
   // DONE: get the quantity
 
   // DONE: using those, add one item to the Cart
+  
+
   let selectedItem = new CartItem(item,quantity);
-
-  // state.cart.push(selectedItem);
-
   state.cart.items.push(selectedItem)
+
+
 
 }
 
@@ -62,21 +63,26 @@ function updateCounter() {
   }
   itemCount.innerText = `${sum}`
 }
-// TODO: As you add items into the cart, show them (item & quantity) in the cart preview div
+// DONE: As you add items into the cart, show them (item & quantity) in the cart preview div
 let cartContents = document.getElementById('cartContents');
 
 function updateCartPreview() {
-  // TODO: Get the item and quantity from the form
+  // DONE: Get the item and quantity from the form
   while (cartContents.firstChild) {
     cartContents.removeChild(cartContents.firstChild);
   }
   //for loops 
-  let item = state.cart.items.at(-1).product;
-  let quantity = state.cart.items.at(-1).quantity;
-  // TODO: Add a new element to the cartContents div with that information
-  let previewDiv = document.createElement('div');
-  previewDiv.innerText = `You have ${quantity}, ${item} in your cart.`;
-  cartContents.appendChild(previewDiv);
+  let item;
+  let quantity;
+
+  for (let i in state.cart.items) {
+    item = state.cart.items.at(i).product;
+    quantity = state.cart.items.at(i).quantity;
+    let previewDiv = document.createElement('div');
+    previewDiv.innerText = `You have ${quantity}, ${item} in your cart.`;
+    cartContents.appendChild(previewDiv);
+  }
+  // DONE: Add a new element to the cartContents div with that information
 }
 
 // Set up the "submit" event listener on the form.
